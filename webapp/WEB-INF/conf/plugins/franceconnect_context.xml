@@ -33,6 +33,7 @@
     </bean>      
     
     <bean id="franceconnect.userInfoClient" class="fr.paris.lutece.plugins.franceconnect.oidc.DataClient">
+        <property name="name" value="userinfo" />
         <property name="dataServerUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
         <property name="tokenMethod" value="HEADER"/>
         <property name="scope">

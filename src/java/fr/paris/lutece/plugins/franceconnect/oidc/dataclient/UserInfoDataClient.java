@@ -40,6 +40,8 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -59,7 +61,7 @@ public class UserInfoDataClient extends AbstractDataClient
      * {@inheritDoc }
      */
     @Override
-    public void handleToken( Token token )
+    public void handleToken( Token token , HttpServletRequest  request , HttpServletResponse  response )
     {
         try
         {

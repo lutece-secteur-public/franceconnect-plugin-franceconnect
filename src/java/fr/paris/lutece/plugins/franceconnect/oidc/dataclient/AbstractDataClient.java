@@ -33,8 +33,6 @@
  */
 package fr.paris.lutece.plugins.franceconnect.oidc.dataclient;
 
-import fr.paris.lutece.plugins.franceconnect.oidc.AuthClientConf;
-import fr.paris.lutece.plugins.franceconnect.oidc.AuthServerConf;
 import fr.paris.lutece.plugins.franceconnect.oidc.Token;
 import fr.paris.lutece.plugins.franceconnect.service.BearerTokenAuthenticator;
 import fr.paris.lutece.plugins.franceconnect.web.Constants;

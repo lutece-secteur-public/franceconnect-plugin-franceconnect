@@ -22,9 +22,9 @@
     <!-- servlets -->
     <servlets>
         <servlet>
-            <servlet-name>franceconnectAuthLogin</servlet-name>
-            <url-pattern>/servlet/plugins/franceconnect/login</url-pattern>
-            <servlet-class>fr.paris.lutece.plugins.franceconnect.web.OAuthLoginServlet</servlet-class>
+            <servlet-name>franceconnectAuthCallback</servlet-name>
+            <url-pattern>/servlet/plugins/franceconnect/callback</url-pattern>
+            <servlet-class>fr.paris.lutece.plugins.franceconnect.web.OAuthCallbackServlet</servlet-class>
         </servlet>
         
         <servlet>

@@ -217,7 +217,7 @@ public class CallbackHandler
             HttpSession session = request.getSession(  );
             Token token = getToken( strCode, session );
             DataClient dataClient = (DataClient) session.getAttribute( ATTRIBUTE_DATACLIENT );
-            dataClient.handleToken( token );
+            dataClient.handleToken( token , request , response );
         }
         catch ( IOException ex )
         {
