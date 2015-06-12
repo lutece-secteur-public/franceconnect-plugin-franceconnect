@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * AuthLoginServlet
  */
-public class OAuthLoginServlet extends HttpServlet
+public class OAuthCallbackServlet extends HttpServlet
 {
     private static final String BEAN_CALLBACK_HANDLER = "franceconnect.callbackHandler";
     private static final long serialVersionUID = 1L;

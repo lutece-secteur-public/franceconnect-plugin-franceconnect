@@ -39,6 +39,8 @@ import fr.paris.lutece.plugins.franceconnect.service.MapperService;
 
 
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -51,7 +53,7 @@ public class UserInfoDataClient extends AbstractDataClient
      * {@inheritDoc }
      */
     @Override
-    public void handleToken( Token token )
+    public void handleToken( Token token , HttpServletRequest  request , HttpServletResponse  response )
     {
         try
         {

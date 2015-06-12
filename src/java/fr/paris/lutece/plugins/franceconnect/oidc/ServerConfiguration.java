@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.mylutece.modules.franceconnect.oauth2;
+package fr.paris.lutece.plugins.franceconnect.oidc;
 
 import java.io.Serializable;
 
