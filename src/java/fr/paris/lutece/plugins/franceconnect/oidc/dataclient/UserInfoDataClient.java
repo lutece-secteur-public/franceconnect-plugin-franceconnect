@@ -35,9 +35,8 @@ package fr.paris.lutece.plugins.franceconnect.oidc.dataclient;
 
 import fr.paris.lutece.plugins.franceconnect.oidc.Token;
 import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
+import fr.paris.lutece.plugins.franceconnect.service.MapperService;
 
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 
@@ -47,13 +46,6 @@ import java.io.IOException;
  */
 public class UserInfoDataClient extends AbstractDataClient
 {
-    private static ObjectMapper _mapper;
-
-    static
-    {
-        _mapper = new ObjectMapper(  );
-        _mapper.configure( DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false );
-    }
 
     /**
      * {@inheritDoc }
@@ -63,23 +55,11 @@ public class UserInfoDataClient extends AbstractDataClient
     {
         try
         {
-            UserInfo userInfo = parse( getData( token ) );
+            UserInfo userInfo = MapperService.parse( getData( token ) , UserInfo.class );
             _logger.debug( "UserInfo retrieved for " + userInfo.getGivenName(  ) + " " + userInfo.getFamilyName(  ) );
         }
         catch ( IOException ex )
         {
             _logger.error( "Error parsing UserInfo ", ex );
         }
-    }
-
-    /**
-     * parse the JSON for a token
-     * @param strJson The JSON
-     * @return The UserInfo
-     * @throws java.io.IOException if an error occurs
-     */
-    UserInfo parse( String strJson ) throws IOException
-    {
-        return _mapper.readValue( strJson, UserInfo.class );
-    }
-}
+    }}

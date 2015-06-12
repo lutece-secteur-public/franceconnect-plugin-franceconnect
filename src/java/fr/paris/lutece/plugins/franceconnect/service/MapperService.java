@@ -31,35 +31,37 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.franceconnect.oidc.dataclient;
+package fr.paris.lutece.plugins.franceconnect.service;
 
-import fr.paris.lutece.plugins.franceconnect.oidc.UserInfo;
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 
 import java.io.IOException;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
- *
- * @author pierre
+ * JSON Mapper utils
  */
-public class UserInfoDataClientTest
+public class MapperService
 {
-    private static final String JSON = "{\"sub\": \"012632343621c2600f43b5ab1936743dfc8a199ceca851a7\",\"birthcountry\": \"33\", \"birthplace\": \"91272\",\"birthdate\": \"1976-02-24\",\"given_name\": \"Pierre\",\"family_name\": \"Dupond\", \"gender\": \"male\",\"preferred_username\": \"Dupont\" }";
 
-    /**
-     * Test of handleToken method, of class UserInfoDataClient.
-     */
-    @Test
-    public void testParse(  ) throws IOException
+    private static ObjectMapper _mapper;
+
+    static
     {
-        System.out.println( "parse" );
-
-        UserInfoDataClient instance = new UserInfoDataClient(  );
-        UserInfo userInfo = instance.parse( JSON );
-
-        assertEquals( userInfo.getGivenName(  ), "Pierre" );
-        assertEquals( userInfo.getFamilyName(  ), "Dupond" );
+        _mapper = new ObjectMapper(  );
+        _mapper.configure( DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false );
     }
+    
+    
+    /**
+     * parse the JSON for a bean
+     * @param strJson The JSON
+     * @return The UserInfo
+     * @throws java.io.IOException if an error occurs
+     */
+    public static <T> T parse( String strJson , Class<T> t ) throws IOException
+    {
+        return _mapper.readValue( strJson, t );
+    }
+
 }
