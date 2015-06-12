@@ -1,87 +1,82 @@
 
-#Module MyLutece pour FranceConnect
+#Plugin FranceConnect
 
-![](http://dev.lutece.paris.fr/plugins/module-mylutece-franceconnect/images/franceconnect.jpeg)
+![](http://dev.lutece.paris.fr/plugins/plugin-franceconnect/images/franceconnect.jpeg)
 
 ##Introduction
 
-Ce module permet aux utilisateurs d'un site ou d'une application Lutece de s'authentifier via [FranceConnect](http://www.dev-franceconnect.fr) . Grâce à cette authentification, un fournisseur de service peut ensuite accéder à des ressourcesliées à l'utilisateur (et avec son consentement) via le protocole OpenID Connect.
+Ce plugin permet d'acceder à des ressources via la plate-forme [FranceConnect](http://www.dev-franceconnect.fr) . Grâce à l'authentification par le biais d'un fournisseur d'identités de laplate-forme FranceConnect, un fournisseur de service peut ensuite accéder à des ressources liées à l'utilisateur (et avec son consentement).L'accès à ces ressources se fait via le protocole [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html) .
+
+Ce plugin propose aux fournisseurs de service une API Java **DataClient** qui permet de créer des services d'accès aux données. Pour plus d'informations surl'utilisation de cette API, reportez-vous à la documentation du [Wiki](wiki.lutece.paris.fr) .
+
+Ce plugin est également utilisé par le Module [MyLutece FranceConnect](https://github.com/lutece-platform/lutece-auth-module-mylutece-franceconnect) qui permet de faire une authentification Lutece basée sur lesfournisseurs d'identités de FranceConnect.
 
 #Installation
 
 ##Configuration
 
-Vérifier dans le fichier `WEB-INF/conf/plugins/mylutece.properties` que l'authentification est bien activée comme suit :
+Configurer le fichier de context du plugin (WEB-INF/conf/plugins/franceconnect_context.xml).
 
-
-```
-
-# Enable authentication
-mylutece.authentication.enable=true
-    
-mylutece.authentication.class=fr.paris.lutece.plugins.mylutece.modules.franceconnect.authentication.FranceConnectAuthentication
-
-mylutece.url.login.page=Portal.jsp?page=franceconnect
-mylutece.url.doLogout=servlet/plugins/mylutece/modules/franceconnect/logout
-mylutece.url.default.redirect=../../Portal.jsp
-
-
-```
-
-
-Le fichier de context du module (WEB-INF/conf/plugins/mylutece-franceconnect_context.xml) doit ensuite être paramétré avec les informationsdu service client (id, secret et callback) :
+Il faut notamment paramétrer :
+ 
+* Les adresses des WebServices la plate-forme FranceConnect (end points)
+* Vos identifiants (id, secret) qui vous auront été fournit par FranceConnect
+* L'adresse du Callback du plugin (NB : Cette adresse doit être enregistrée et associée à votre ID Client auprès FranceConnect.Tout changement de serveur doit faire l'objet d'un nouvel enregistrement)
+doit ensuite être paramétré avec les informationsdu service client (id, secret et callback) :
 
 
 ```
            
- 
+     
+    <bean id="franceconnect.server" class="fr.paris.lutece.plugins.franceconnect.oidc.AuthServerConf">
+        <property name="issuer" value="http://fcp.integ01.dev-franceconnect.fr"/>
+        <property name="authorizationEndpointUri"
+                                  value="https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"/>
+        <property name="tokenEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/token"/>
+    </bean> 
     
-<bean id="mylutece-franceconnect.server" class="fr.paris.lutece.plugins.mylutece.modules.franceconnect.oauth2.ServerConfiguration">
-    <property name="issuer" value="http://fcp.integ01.dev-franceconnect.fr"/>
-    <property name="authorizationEndpointUri"
-                              value="https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"/>
-    <property name="tokenEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/token"/>
-    <property name="userInfoUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
-    <property name="userInfoTokenMethod" value="HEADER"/>
-</bean>
+    <bean id="franceconnect.client" class="fr.paris.lutece.plugins.franceconnect.oidc.AuthClientConf">
+        <property name="clientId" value=" **** à renseigner **** "/>
+        <property name="clientSecret" value=" **** à renseigner **** "/>
+        <property name="redirectUri" value=" **** à renseigner **** "/>
+    </bean>       
+    
+    <bean id="franceconnect.callbackHandler" class="fr.paris.lutece.plugins.franceconnect.web.CallbackHandler" >
+        <property name="authServerConf">
+            <idref>franceconnect.server</idref>
+        </property>
+        <property name="authClientConf">
+            <idref>franceconnect.client</idref>
+        </property>
+    </bean>      
+    
+    <!-- DataClient UserInfo -->
+    <bean id="franceconnect.userInfoClient" class="fr.paris.lutece.plugins.franceconnect.oidc.DataClient">
+        <property name="dataServerUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
+        <property name="tokenMethod" value="HEADER"/>
+        <property name="scope">
+            <set value-type="java.lang.String">
+                <value>openid</value>
+                <value>profile</value>
+                <value>email</value>
+                <value>address</value>
+                <value>phone</value>
+            </set>
+        </property>
+    </bean>
 
-<bean id="mylutece-franceconnect.client" class="fr.paris.lutece.plugins.mylutece.modules.franceconnect.oauth2.RegisteredClient">
-    <property name="clientId" value="  *** à renseigner ***  "/>
-    <property name="clientSecret" value="  *** à renseigner ***  "/>
-    <property name="scope">
-        <set value-type="java.lang.String">
-            <value>openid</value>
-            <value>profile</value>
-        </set>
-    </property>
-    <property name="tokenEndpointAuthMethod" value=""/>
-    <property name="redirectUri" value=" *** à renseigner *** "/>
-    <property name="redirectUris">
-        <set>
-            <value> *** à renseigner *** </value>
-        </set>
-    </property>
-</bean>
+<!--    <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.MitreJWTParser" /> -->
+    <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.JjwtJWTParser" />
     
 
 
 ```
 
-
-##Usage
-
-La page d'authentification FranceConnect s'appelle à partir de l'URL suivante :
-
- `http://myhost/lutece/jsp/site/Portal.jsp?page=franceconnect` 
-
-Il est possible de réaliser ce formulaire d'authentification dans un portlet, soit en copiant le contenu du formulaire dans un portlet HTML, soit en modifiant la feuillede style XSL du portlet MyLutece.
 
 ##Dépannage
 
 
  
-* Vérifiez bien la configuration de MyLutece comme indiqué ci-dessus.
-* Assurez-vous que le module FranceConnect est le seul module MyLutece présent dans la Webapp. Il ne doit pas y avoir d'autres fichiers `mylutece-xxxxx.properties` dans le répertoire `WEB-INF/conf/plugins/` .
 * L'activation des logs en mode debug se fait en ajoutant la ligne suivante dans le fichier `WEB-INF/conf/config.properties` dans la rubrique LOGGERS :
 
 ```
@@ -94,7 +89,7 @@ log4j.logger.lutece.franceconnect=DEBUG, Console
 
 
 
-[Maven documentation and reports](http://dev.lutece.paris.fr/plugins/module-mylutece-franceconnect/)
+[Maven documentation and reports](http://dev.lutece.paris.fr/plugins/plugin-franceconnect/)
 
 
 

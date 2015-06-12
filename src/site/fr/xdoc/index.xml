@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Module MyLutece pour FranceConnect</title>
+        <title>Plugin FranceConnect</title>
     </properties>
     <body>
-        <section name="Module MyLutece pour FranceConnect">
+        <section name="Plugin FranceConnect">
             <p>
                 <img src="images/franceconnect.jpeg" />
             </p>
             <subsection name="Introduction">
                 <p>
                     Ce plugin permet d'acceder à des ressources via la plate-forme <a href="http://www.dev-franceconnect.fr" target="_blank">FranceConnect</a>.
-                    Grâce à l'authentification par le biais d'un fournisseur d'identité de la
+                    Grâce à l'authentification par le biais d'un fournisseur d'identités de la
                     plate-forme FranceConnect, un fournisseur de service peut ensuite accéder à des ressources
                     liées à l'utilisateur (et avec son consentement).
                     L'accès à ces ressources se fait via le protocole 
