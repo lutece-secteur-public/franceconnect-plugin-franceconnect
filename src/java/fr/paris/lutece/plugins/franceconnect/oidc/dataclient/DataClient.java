@@ -33,8 +33,6 @@
  */
 package fr.paris.lutece.plugins.franceconnect.oidc.dataclient;
 
-import fr.paris.lutece.plugins.franceconnect.oidc.AuthClientConf;
-import fr.paris.lutece.plugins.franceconnect.oidc.AuthServerConf;
 import fr.paris.lutece.plugins.franceconnect.oidc.Token;
 
 import java.util.Set;
@@ -43,8 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- *
- * @author pierre
+ * DataClient 
  */
 public interface DataClient
 {
@@ -112,7 +109,7 @@ public interface DataClient
 
     /**
      * Called by the callback
-     * @param token
+     * @param token The retrieved token
      * @param request The HTTP request
      * @param response The HTTP response
      */

@@ -65,8 +65,7 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- *
- * @author pierre
+ * CallbackHandler
  */
 public class CallbackHandler
 {
@@ -110,9 +109,9 @@ public class CallbackHandler
     }
 
     /**
-     *
-     * @param request
-     * @param response
+     * Handle the callback
+     * @param request The HTTP request
+     * @param response The HTTP response
      */
     void handle( HttpServletRequest request, HttpServletResponse response )
     {

@@ -41,7 +41,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 /**
  * JSON Mapper utils
  */
-public class MapperService
+public final class MapperService
 {
 
     private static ObjectMapper _mapper;
@@ -52,12 +52,18 @@ public class MapperService
         _mapper.configure( DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false );
     }
     
+    /** Private constructor */
+    private MapperService()
+    {
+    }
     
     /**
      * parse the JSON for a bean
+     * @param <T> The Bean class
      * @param strJson The JSON
-     * @return The UserInfo
-     * @throws java.io.IOException if an error occurs
+     * @param t The bean class
+     * @return The bean
+     * @throws IOException if an error occurs
      */
     public static <T> T parse( String strJson , Class<T> t ) throws IOException
     {

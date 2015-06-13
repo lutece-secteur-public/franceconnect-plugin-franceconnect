@@ -46,7 +46,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * DataClientService
  */
-public class DataClientService
+public final class DataClientService
 {
     private static DataClientService _singleton;
     private static ConcurrentMap<String, DataClient> _mapClients;
