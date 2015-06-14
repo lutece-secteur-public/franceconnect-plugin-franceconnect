@@ -48,7 +48,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OAuthCallbackServlet extends HttpServlet
 {
-    private static final String BEAN_CALLBACK_HANDLER = "franceconnect.callbackHandler";
     private static final long serialVersionUID = 1L;
     private CallbackHandler _callbackHandler;
 
@@ -71,7 +70,7 @@ public class OAuthCallbackServlet extends HttpServlet
     {
         if ( _callbackHandler == null )
         {
-            _callbackHandler = SpringContextService.getBean( BEAN_CALLBACK_HANDLER );
+            _callbackHandler = SpringContextService.getBean( Constants.BEAN_CALLBACK_HANDLER );
         }
     }
 }

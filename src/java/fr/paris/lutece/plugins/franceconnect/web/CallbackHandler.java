@@ -69,7 +69,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CallbackHandler
 {
-    private static final String ATTRIBUTE_DATACLIENT = "fc_data_client";
     private static final String PROPERTY_ERROR_PAGE = "franceconnect.error.page";
     private static final long serialVersionUID = 1L;
     private static Logger _logger = Logger.getLogger( Constants.LOGGER_FRANCECONNECT );
@@ -168,7 +167,7 @@ public class CallbackHandler
 
             String strDataClientName = request.getParameter( Constants.PARAMETER_DATA_CLIENT );
             DataClient dataClient = DataClientService.instance(  ).getClient( strDataClientName );
-            session.setAttribute( ATTRIBUTE_DATACLIENT, dataClient );
+            session.setAttribute( Constants.SESSION_ATTRIBUTE_DATACLIENT, dataClient );
 
             UrlItem url = new UrlItem( _authServerConf.getAuthorizationEndpointUri(  ) );
             url.addParameter( Constants.PARAMETER_CLIENT_ID, _authClientConf.getClientId(  ) );
@@ -215,7 +214,7 @@ public class CallbackHandler
         {
             HttpSession session = request.getSession(  );
             Token token = getToken( strCode, session );
-            DataClient dataClient = (DataClient) session.getAttribute( ATTRIBUTE_DATACLIENT );
+            DataClient dataClient = (DataClient) session.getAttribute( Constants.SESSION_ATTRIBUTE_DATACLIENT );
             dataClient.handleToken( token , request , response );
         }
         catch ( IOException ex )

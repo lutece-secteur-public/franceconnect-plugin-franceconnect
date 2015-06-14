@@ -33,14 +33,17 @@
  */
 package fr.paris.lutece.plugins.franceconnect.oidc;
 
+import java.io.Serializable;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
 /**
  * UserInfo
  */
-public class UserInfo
+public class UserInfo implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     @JsonProperty( "sub" )
     private String _strSub;
     @JsonProperty( "gender" )

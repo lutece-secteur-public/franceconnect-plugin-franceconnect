@@ -34,8 +34,10 @@
 package fr.paris.lutece.plugins.franceconnect.service;
 
 import fr.paris.lutece.plugins.franceconnect.oidc.dataclient.DataClient;
+import fr.paris.lutece.plugins.franceconnect.web.CallbackHandler;
 import fr.paris.lutece.plugins.franceconnect.web.Constants;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
+import fr.paris.lutece.util.url.UrlItem;
 
 import org.apache.log4j.Logger;
 
@@ -51,6 +53,7 @@ public final class DataClientService
     private static DataClientService _singleton;
     private static ConcurrentMap<String, DataClient> _mapClients;
     private static Logger _logger = Logger.getLogger( Constants.LOGGER_FRANCECONNECT );
+    private static CallbackHandler _callbackHandler = SpringContextService.getBean( Constants.BEAN_CALLBACK_HANDLER );
 
     /** Private constructor */
     private DataClientService(  )
@@ -94,5 +97,17 @@ public final class DataClientService
     public DataClient getClient( String strName )
     {
         return _mapClients.get( strName );
+    }
+    
+    /**
+     * Gets the dataclient URL
+     * @param strDataClientName The data client name
+     * @return The URL
+     */
+    public String getDataClientUrl( String strDataClientName )
+    {
+        UrlItem url = new UrlItem( _callbackHandler.getAuthClientConf().getRedirectUri() );
+        url.addParameter( Constants.PARAMETER_DATA_CLIENT, strDataClientName );
+        return url.getUrl();
     }
 }

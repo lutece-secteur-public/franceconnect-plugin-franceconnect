@@ -59,6 +59,9 @@ public final class Constants
     public static final String CLAIM_NONCE = "nonce";
     public static final String CLAIM_IDP = "idp";
     public static final String CLAIM_ACR = "acr";
+    public static final String SESSION_ATTRIBUTE_DATACLIENT = "fc_data_client";
+    public static final String BEAN_CALLBACK_HANDLER = "franceconnect.callbackHandler";
+
 
     /** Private constructor */
     private Constants(  )
