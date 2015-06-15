@@ -178,6 +178,12 @@ public class CallbackHandler
             url.addParameter( Constants.PARAMETER_SCOPE, dataClient.getScopes(  ) );
             url.addParameter( Constants.PARAMETER_STATE, createState( session ) );
             url.addParameter( Constants.PARAMETER_NONCE, createNonce( session ) );
+            
+            String strAcrValues = dataClient.getAcrValues();
+            if( strAcrValues != null )
+            {
+                url.addParameter( Constants.PARAMETER_ACR_VALUES, strAcrValues );
+            }
 
             String strUrl = url.getUrl(  );
             _logger.debug( "OAuth request : " + strUrl );

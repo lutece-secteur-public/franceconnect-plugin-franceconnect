@@ -89,6 +89,14 @@
                 &lt;value&gt;phone&lt;/value&gt;
             &lt;/set&gt;
         &lt;/property&gt;
+        &lt;!-- Optional eIDAS management --&gt;
+        &lt;!--
+        &lt;property name="acrValuesSet"&gt;
+            &lt;set value-type="java.lang.String"&gt;
+                &lt;value&gt;eidas2&lt;/value&gt;
+            &lt;/set&gt;
+        &lt;/property&gt;
+        --&gt;
     &lt;/bean&gt;
 
 &lt;!--    &lt;bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.MitreJWTParser" /&gt; --&gt;

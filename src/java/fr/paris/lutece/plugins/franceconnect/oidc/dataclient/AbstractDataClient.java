@@ -52,11 +52,15 @@ import java.util.Set;
 public abstract class AbstractDataClient implements DataClient
 {
     protected static Logger _logger = Logger.getLogger( Constants.LOGGER_FRANCECONNECT );
+    
+    private static final char SEPARATOR = '+';
+    
     private String _strName;
     private String _strRedirectUri;
     private String _strDataServerUri;
     private String _strTokenMethod;
     private Set<String> _scope;
+    private Set<String> _acrValues;
 
     /**
      * {@inheritDoc }
@@ -98,6 +102,31 @@ public abstract class AbstractDataClient implements DataClient
      * {@inheritDoc }
      */
     @Override
+    public String getScopes(  )
+    {
+        StringBuilder sbScopes = new StringBuilder(  );
+
+        Iterator iterator = _scope.iterator(  );
+        boolean bFirst = true;
+
+        while ( iterator.hasNext(  ) )
+        {
+            if ( !bFirst )
+            {
+                sbScopes.append( SEPARATOR );
+            }
+
+            bFirst = false;
+            sbScopes.append( iterator.next(  ) );
+        }
+
+        return sbScopes.toString(  );
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
     public String getRedirectUri(  )
     {
         return _strRedirectUri;
@@ -116,25 +145,48 @@ public abstract class AbstractDataClient implements DataClient
      * {@inheritDoc }
      */
     @Override
-    public String getScopes(  )
+    public Set getAcrValuesSet(  )
     {
-        StringBuilder sbScopes = new StringBuilder(  );
+        return _acrValues;
+    }
 
-        Iterator iterator = _scope.iterator(  );
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void setAcrValuesSet( Set acrValues )
+    {
+        _acrValues = acrValues;
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String getAcrValues(  )
+    {
+        if( _acrValues.isEmpty() )
+        {
+            return null;
+        }
+        
+        StringBuilder sbAcrValues = new StringBuilder(  );
+
+        Iterator iterator = _acrValues.iterator(  );
         boolean bFirst = true;
 
         while ( iterator.hasNext(  ) )
         {
             if ( !bFirst )
             {
-                sbScopes.append( '+' );
+                sbAcrValues.append( SEPARATOR );
             }
 
             bFirst = false;
-            sbScopes.append( iterator.next(  ) );
+            sbAcrValues.append( iterator.next(  ) );
         }
 
-        return sbScopes.toString(  );
+        return sbAcrValues.toString(  );
     }
 
     /**
