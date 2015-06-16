@@ -165,7 +165,7 @@ public abstract class AbstractDataClient implements DataClient
     @Override
     public String getAcrValues(  )
     {
-        if( _acrValues.isEmpty() )
+        if( _acrValues==null || _acrValues.isEmpty() )
         {
             return null;
         }
