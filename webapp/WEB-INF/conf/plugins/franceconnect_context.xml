@@ -12,9 +12,9 @@
     
     <bean id="franceconnect.server" class="fr.paris.lutece.plugins.franceconnect.oidc.AuthServerConf">
         <property name="issuer" value="http://fcp.integ01.dev-franceconnect.fr"/>
-        <property name="authorizationEndpointUri"
-                                  value="https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"/>
+        <property name="authorizationEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"/>
         <property name="tokenEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/token"/>
+        <property name="logoutEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/logout"/>
     </bean> 
     
     <bean id="franceconnect.client" class="fr.paris.lutece.plugins.franceconnect.oidc.AuthClientConf">

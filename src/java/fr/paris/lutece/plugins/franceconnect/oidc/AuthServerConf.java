@@ -45,6 +45,7 @@ public class AuthServerConf implements Serializable
     private String _strIssuer;
     private String _strAuthorizationEndpointUri;
     private String _strTokenEndpointUri;
+    private String _strLogoutEndpointUri;
 
     /**
      * Returns the Issuer
@@ -105,4 +106,25 @@ public class AuthServerConf implements Serializable
     {
         _strTokenEndpointUri = strTokenEndpointUri;
     }
+    
+    /**
+     * Returns the LogoutEndpointUri
+     *
+     * @return The LogoutEndpointUri
+     */
+    public String getLogoutEndpointUri(  )
+    {
+        return _strLogoutEndpointUri;
+    }
+
+    /**
+     * Sets the LogoutEndpointUri
+     *
+     * @param strLogoutEndpointUri The LogoutEndpointUri
+     */
+    public void setLogoutEndpointUri( String strLogoutEndpointUri )
+    {
+        _strLogoutEndpointUri = strLogoutEndpointUri;
+    }
+    
 }
