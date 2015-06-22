@@ -25,7 +25,7 @@
     
     <bean id="franceconnect.callbackHandler" class="fr.paris.lutece.plugins.franceconnect.web.CallbackHandler" >
         <property name="authServerConf" ref="franceconnect.server"/>
- 		<property name="authClientConf" ref="franceconnect.client"/>
+        <property name="authClientConf" ref="franceconnect.client"/>
         
     </bean>      
     
@@ -42,9 +42,17 @@
                 <value>phone</value>
             </set>
         </property>
+        <!-- Optional eIDAS management -->
+        <!--
+        <property name="acrValuesSet">
+            <set value-type="java.lang.String">
+                <value>eidas2</value>
+            </set>
+        </property>
+        -->
     </bean>
 
-<!--    <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.MitreJWTParser" /> -->
+    <!--    <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.MitreJWTParser" /> -->
     <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.JjwtJWTParser" />
         
 </beans>

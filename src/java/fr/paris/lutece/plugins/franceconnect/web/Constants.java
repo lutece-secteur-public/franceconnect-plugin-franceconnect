@@ -53,6 +53,7 @@ public final class Constants
     public static final String PARAMETER_RESPONSE_TYPE = "response_type";
     public static final String PARAMETER_ACCESS_TOKEN = "access_token";
     public static final String PARAMETER_DATA_CLIENT = "data_client";
+    public static final String PARAMETER_ACR_VALUES = "acr_values";
     public static final String GRANT_TYPE_CODE = "authorization_code";
     public static final String STATE_SESSION_VARIABLE = "state";
     public static final String NONCE_SESSION_VARIABLE = "nonce";
@@ -61,6 +62,7 @@ public final class Constants
     public static final String CLAIM_ACR = "acr";
     public static final String SESSION_ATTRIBUTE_DATACLIENT = "fc_data_client";
     public static final String BEAN_CALLBACK_HANDLER = "franceconnect.callbackHandler";
+    
 
 
     /** Private constructor */

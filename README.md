@@ -63,6 +63,14 @@ doit ensuite être paramétré avec les informationsdu service client (id, secre
                 <value>phone</value>
             </set>
         </property>
+        <!-- Optional eIDAS management -->
+        <!--
+        <property name="acrValuesSet">
+            <set value-type="java.lang.String">
+                <value>eidas2</value>
+            </set>
+        </property>
+        -->
     </bean>
 
 <!--    <bean id="franceconnect.jwtParser" class="fr.paris.lutece.plugins.franceconnect.oidc.jwt.MitreJWTParser" /> -->

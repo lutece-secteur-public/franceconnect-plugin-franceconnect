@@ -63,7 +63,7 @@ public interface DataClient
     String getRedirectUri(  );
 
     /**
-     * Returns the Scope
+     * Returns the Scopes set
      * @return The Scope
      */
     Set getScope(  );
@@ -74,6 +74,24 @@ public interface DataClient
      */
     String getScopes(  );
 
+    /**
+     * Set ACR values set
+     * @param acrValues The ACR values set
+     */
+    void setAcrValuesSet( Set acrValues );
+
+    /**
+     * Returns the set of ACR
+     * @return The set of ACR
+     */
+    Set getAcrValuesSet(  );
+    
+    /**
+     * Returns the set of ACR values
+     * @return The set of ACR values
+     */
+    String getAcrValues(  );
+    
     /**
      * @return the TokenMethod
      */
