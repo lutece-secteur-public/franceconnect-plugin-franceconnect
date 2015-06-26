@@ -1,7 +1,7 @@
 
 #Plugin FranceConnect
 
-![](http://dev.lutece.paris.fr/plugins/plugin-franceconnect/images/franceconnect.jpeg)
+![](http://dev.lutece.paris.fr/plugins/plugin-franceconnect/images/franceconnect.png)
 
 ##Introduction
 
