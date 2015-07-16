@@ -33,8 +33,11 @@
  */
 package fr.paris.lutece.plugins.franceconnect.oidc;
 
-import java.io.Serializable;
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.io.Serializable;
+
+import java.util.Map;
 
 
 /**
@@ -43,7 +46,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class UserInfo implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    
     @JsonProperty( "sub" )
     private String _strSub;
     @JsonProperty( "gender" )
@@ -86,8 +88,22 @@ public class UserInfo implements Serializable
     private String _strPhoneNumber;
     @JsonProperty( "phone_number_verified" )
     private String _strPhoneNumberVerified;
-    @JsonProperty( "address" )
-    private String _strAddress;
+
+    //The addess object
+    //"address" : {
+    //   "country" : "France",
+    //   "street_address" : "26 rue Desaix",
+    //   "postal_code" : "75015",
+    //   "formatted" : "26 rue Desaix, 75015 Paris",
+    //   "region" : "Ile-de-France",
+    //   "locality" : "Paris"
+    //},
+    private String _strAddressCountry;
+    private String _strAddressStreetAddress;
+    private String _strAddressPostalCode;
+    private String _strAddressFormatted;
+    private String _strAddressRegion;
+    private String _strAddressLocality;
 
     /**
      * Returns the Sub
@@ -469,19 +485,80 @@ public class UserInfo implements Serializable
 
     /**
      * Returns the Address
+     * Kept for backwards compatibily, same as getAddressFormatted()
      * @return The Address
      */
     public String getAddress(  )
     {
-        return _strAddress;
+        return _strAddressFormatted;
     }
 
     /**
-     * Sets the Address
-     * @param strAddress The Address
+     * Returns the AddressCountry
+     * @return The Address country
      */
-    public void setAddress( String strAddress )
+    public String getAddressCountry(  )
     {
-        _strAddress = strAddress;
+        return _strAddressCountry;
+    }
+
+    /**
+     * Returns the AddressStreetAddress
+     * @return The Address street address
+     */
+    public String getAddressStreetAddress(  )
+    {
+        return _strAddressStreetAddress;
+    }
+
+    /**
+     * Returns the AddressPostalCode
+     * @return The Address postal code
+     */
+    public String getAddressPostalCode(  )
+    {
+        return _strAddressPostalCode;
+    }
+
+    /**
+     * Returns the AddressFormatted
+     * @return The Address formatted
+     */
+    public String getAddressFormatted(  )
+    {
+        return _strAddressFormatted;
+    }
+
+    /**
+     * Returns the AddressRegion
+     * @return The Address region
+     */
+    public String getAddressRegion(  )
+    {
+        return _strAddressRegion;
+    }
+
+    /**
+     * Returns the AddressLocality
+     * @return The Address locality
+     */
+    public String getAddressLocality(  )
+    {
+        return _strAddressLocality;
+    }
+
+    /**
+     * Sets the Address fields from a json object
+     * @param addressObject The Map of fields of address
+     */
+    @JsonProperty( "address" )
+    public void setAddressObject( Map<String, Object> addressObject )
+    {
+        _strAddressCountry = (String) addressObject.get( "country" );
+        _strAddressStreetAddress = (String) addressObject.get( "street_address" );
+        _strAddressPostalCode = (String) addressObject.get( "postal_code" );
+        _strAddressFormatted = (String) addressObject.get( "formatted" );
+        _strAddressRegion = (String) addressObject.get( "region" );
+        _strAddressLocality = (String) addressObject.get( "locality" );
     }
 }
