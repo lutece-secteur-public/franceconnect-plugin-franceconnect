@@ -57,9 +57,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/lutece-platform/lutece-auth-plugin-franceconnect.git</connection>
-        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-auth-plugin-franceconnect.git</developerConnection>
-        <url>https://github.com/lutece-platform/lutece-auth-plugin-franceconnect.git</url>
+        <connection>scm:git:https://github.com/lutece-secteur-public/plugin-franceconnect.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-secteur-public/plugin-franceconnect.git</developerConnection>
+        <url>https://github.com/lutece-secteur-public/plugin-franceconnect.git</url>
       <tag>HEAD</tag>
   </scm>
     
