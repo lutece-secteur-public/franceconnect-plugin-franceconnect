@@ -171,7 +171,6 @@ public class CallbackHandler
 
             UrlItem url = new UrlItem( _authServerConf.getAuthorizationEndpointUri(  ) );
             url.addParameter( Constants.PARAMETER_CLIENT_ID, _authClientConf.getClientId(  ) );
-            url.addParameter( Constants.PARAMETER_CLIENT_SECRET, _authClientConf.getClientSecret(  ) );
             url.addParameter( Constants.PARAMETER_RESPONSE_TYPE, Constants.RESPONSE_TYPE_CODE );
             url.addParameter( Constants.PARAMETER_REDIRECT_URI,
                 URLEncoder.encode( _authClientConf.getRedirectUri(  ), "UTF-8" ) );
