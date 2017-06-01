@@ -1,9 +1,9 @@
-
-#Plugin FranceConnect
+![](http://dev.lutece.paris.fr/jenkins/buildStatus/icon?job=franceconnect-plugin-franceconnect-deploy)
+# Plugin FranceConnect
 
 ![](http://dev.lutece.paris.fr/plugins/plugin-franceconnect/images/franceconnect.png)
 
-##Introduction
+## Introduction
 
 Ce plugin permet d'acceder à des ressources via la plate-forme [FranceConnect](http://www.dev-franceconnect.fr) . Grâce à l'authentification par le biais d'un fournisseur d'identités de laplate-forme FranceConnect, un fournisseur de service peut ensuite accéder à des ressources liées à l'utilisateur (et avec son consentement).L'accès à ces ressources se fait via le protocole [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html) .
 
@@ -11,9 +11,9 @@ Ce plugin propose aux fournisseurs de service une API Java **DataClient** qui pe
 
 Ce plugin est également utilisé par le Module [MyLutece FranceConnect](https://github.com/lutece-platform/lutece-auth-module-mylutece-franceconnect) qui permet de faire une authentification Lutece basée sur lesfournisseurs d'identités de FranceConnect.
 
-#Installation
+# Installation
 
-##Configuration
+## Configuration
 
 Configurer le fichier de context du plugin (WEB-INF/conf/plugins/franceconnect_context.xml).
 
@@ -81,7 +81,7 @@ doit ensuite être paramétré avec les informationsdu service client (id, secre
 ```
 
 
-##Dépannage
+## Dépannage
 
 
  
